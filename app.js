@@ -1,23 +1,25 @@
-function updateTime() {
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
+// function to get updated time (HH:MM:SS)
+function getTime() {
+  const date = new Date();
+  const hours = date.getHours();
+  // padStart - completeaza sirul de caractere pana atinge lungimea specificata
+  // in acest caz, orele si secundele sunt reprezentate de 2 cifre
+  // daca valoarea este sub 10, se va adauga un 0 la inceput
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
 
-  function formatTime(time) {
-    return time < 10 ? `0${time}` : time;
-  }
-
-  const digitalTime = document.querySelector('.setTime');
-  digitalTime.textContent = `${formatTime(hours)}:${formatTime(
-    minutes,
-  )}:${formatTime(seconds)}`;
+  return `${hours}:${minutes}:${seconds}`;
 }
 
-function updateMonth() {
-  const now = new Date();
+const exactTime = getTime();
+
+document.querySelector('.setTime').innerHTML = `${exactTime}`;
+
+// function to get updated date (WeekDay, DD Month)
+function getDate() {
+  const date = new Date();
   const daysOfWeek = [
-    'Duminică',
+    'Duminica',
     'Luni',
     'Marti',
     'Miercuri',
@@ -40,70 +42,71 @@ function updateMonth() {
     'Dec',
   ];
 
-  const dayOfWeek = daysOfWeek[now.getDay()];
-  const dayOfMonth = now.getDate();
-  const month = months[now.getMonth()];
+  const dayOfWeek = daysOfWeek[date.getDay()];
+  const dayOfMonth = date.getDate().toString().padStart(2, '0');
+  const month = months[date.getMonth()];
 
-  function formatTime(time) {
-    return time < 10 ? `0${time}` : time;
-  }
-
-  const digitalDate = document.querySelector('.setDate');
-  digitalDate.textContent = `${dayOfWeek}, ${formatTime(dayOfMonth)} ${month}`;
+  return `${dayOfWeek}, ${dayOfMonth} ${month}`;
 }
 
-setInterval(updateTime, 1000);
-setInterval(updateMonth, 1000);
+const exactDate = getDate();
+document.querySelector('.setDate').innerHTML = `${exactDate}`;
 
-updateTime();
-updateMonth();
+setInterval(getTime, 1000);
+setInterval(getDate, 1000);
 
-// update background based on the season
+getTime();
+getDate();
+
+// function to get updated background based on the season
 function updateSeasonBackground() {
-  const now = new Date();
-  const month = now.getMonth() + 1;
-
-  const body = document.body;
+  const date = new Date();
+  // 0 - ian, 1- feb samd
+  const month = date.getMonth() + 1;
 
   let imageUrl;
   if (month >= 12 || (month >= 1 && month <= 2)) {
-    imageUrl = 'background/winter3.jpg';
+    //check if Dec, Jan or Feb
+    imageUrl = 'background/winter.jpg';
   } else if (month >= 3 && month <= 5) {
+    //check if March, April, or May
     imageUrl = 'background/spring.jpg';
   } else if (month >= 6 && month <= 8) {
+    //check if June, July, or August
     imageUrl = 'background/summer.jpg';
   } else {
+    //check if September, Occtober or November
     imageUrl = 'background/autumn.jpg';
   }
 
-  body.style.backgroundImage = `url('${imageUrl}')`;
+  document.body.style.backgroundImage = `url('${imageUrl}')`;
 }
 
 updateSeasonBackground();
 
+// function to get random quote from an array
 function getRandomQuote() {
   const quotes = [
-    'Perseverența este cheia succesului; indiferent cât de dificilă este călătoria, continuă să mergi cu încredere și vei ajunge la destinația dorită.',
-    'Disciplina înseamnă să faci lucrurile pe care le-ai planificat atunci când nu mai ai chef. Este ceea ce te diferențiază între cei obișnuiți și cei excepționali.',
-    'Atunci când simți că nu mai poți, adu-ți aminte că fiecare pas pe care îl faci înseamnă un pas mai aproape de reușită. Perseverența înfrânge orice obstacol.',
-    'Puterea de a te reinventa vine din dorința de a evolua. Fii dispus să te schimbi, să crești și să devii versiunea ta cea mai bună în fiecare zi.',
-    'Reinventează-te constant pentru a fi mereu relevant. Îmbunătățirea continuă și dorința de a deveni mai bun în fiecare zi sunt secretele celor care ating excelența.',
+    'Tot ce vă puteți imagina este real.',
+    'Succesul nu este final, eşecul nu este fatal: curajul de a continua este ceea ce contează.',
+    'Într-o lume în care poți fi orice, fii bun.',
+    'Succesul = 99% muncă + 1% talent.',
+    'Încet și sigur se câștigă cursa.',
   ];
 
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  return quotes[randomIndex];
+  return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
+// function to update the displayed quote
 function updateQuote() {
-  const quoteText = document.querySelector('.quoteText');
-  if (quoteText) {
-    quoteText.textContent = getRandomQuote();
-  }
+  const quoteTextElement = document.querySelector('.quoteText');
+  quoteTextElement.innerHTML = getRandomQuote();
 }
 
+// initial display of a quote
 updateQuote();
 
+// event delegation for changeQuoteButton
 const changeQuoteButton = document.querySelector('.changeQuoteButton');
-if (changeQuoteButton) {
-  changeQuoteButton.addEventListener('click', updateQuote);
-}
+
+changeQuoteButton.addEventListener('click', updateQuote);

@@ -127,12 +127,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 body {
-  background-position: center center;
+  background: center center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(background/winter3.jpg);
+  background-image: url(background/summer.jpg);
 }
 
 .container {
@@ -168,13 +169,16 @@ body {
   color: #333;
   font-size: 26px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .changeQuoteButton {
   background: none;
   border: none;
   font-size: 20px;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px #706b6b;
 }
 
 .fa-shuffle {
