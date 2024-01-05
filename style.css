@@ -133,7 +133,8 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(background/summer.jpg);
+  background-image: url(background/winter.jpg);
+  height: auto;
 }
 
 .container {
