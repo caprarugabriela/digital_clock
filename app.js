@@ -8,12 +8,13 @@ function getTime() {
   const minutes = date.getMinutes().toString().padStart(2, '0');
   const seconds = date.getSeconds().toString().padStart(2, '0');
 
-  return `${hours}:${minutes}:${seconds}`;
+  const timeNow = `${hours}:${minutes}:${seconds}`;
+  document.querySelector('.setTime').innerHTML = timeNow;
 }
 
-const exactTime = getTime();
-
-document.querySelector('.setTime').innerHTML = `${exactTime}`;
+setInterval(function () {
+  getTime();
+}, 1000);
 
 // function to get updated date (WeekDay, DD Month)
 function getDate() {
@@ -46,17 +47,13 @@ function getDate() {
   const dayOfMonth = date.getDate().toString().padStart(2, '0');
   const month = months[date.getMonth()];
 
-  return `${dayOfWeek}, ${dayOfMonth} ${month}`;
+  const dateNow = `${dayOfWeek}, ${dayOfMonth} ${month}`;
+  document.querySelector('.setDate').innerHTML = dateNow;
 }
 
-const exactDate = getDate();
-document.querySelector('.setDate').innerHTML = `${exactDate}`;
-
-setInterval(getTime, 1000);
-setInterval(getDate, 1000);
-
-getTime();
-getDate();
+setInterval(function () {
+  getDate();
+}, 1000);
 
 // function to get updated background based on the season
 function updateSeasonBackground() {
@@ -81,8 +78,6 @@ function updateSeasonBackground() {
 
   document.body.style.backgroundImage = `url('${imageUrl}')`;
 }
-
-updateSeasonBackground();
 
 // function to get random quote from an array
 function getRandomQuote() {
@@ -110,3 +105,5 @@ updateQuote();
 const changeQuoteButton = document.querySelector('.changeQuoteButton');
 
 changeQuoteButton.addEventListener('click', updateQuote);
+
+updateSeasonBackground();
