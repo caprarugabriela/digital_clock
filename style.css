@@ -144,40 +144,36 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(background/winter.jpg);
-  height: auto;
 }
 
 .container {
   margin: 0 auto;
-  width: 100%;
-  max-width: 1356px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-family: 'Arial', sans-serif;
   text-align: center;
   text-shadow: 1px 1px 1px #706b6b;
 }
 
 .setDate {
   font-family: 'Alice';
-  font-size: 50px;
+  font-size: 60px;
   color: #333;
 }
 
 .setTime {
   font-family: 'Yeseva One';
-  font-size: 140px;
+  font-size: 240px;
+  font-weight: 500;
   color: #333;
 }
 
 .quoteContainer {
   font-family: 'Alice';
   color: #333;
-  font-size: 26px;
+  font-size: 30px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -186,11 +182,24 @@ body {
 .changeQuoteButton {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 26px;
   cursor: pointer;
-  text-shadow: 1px 1px 1px #706b6b;
+  text-shadow: 2px 2px 2px #706b6b;
 }
 
 .fa-shuffle {
   color: #333;
+}
+
+.fa-shuffle:hover {
+  color: #5f6874;
+}
+
+@media (max-width: 992px) {
+  .setTime {
+    font-size: 180px;
+  }
+  .setDate {
+    font-size: 40px;
+  }
 }

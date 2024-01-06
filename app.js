@@ -12,6 +12,9 @@ function getTime() {
   document.querySelector('.setTime').innerHTML = timeNow;
 }
 
+// initial display of time - at loading
+getTime();
+
 setInterval(function () {
   getTime();
 }, 1000);
@@ -20,27 +23,27 @@ setInterval(function () {
 function getDate() {
   const date = new Date();
   const daysOfWeek = [
-    'Duminica',
+    'Duminică',
     'Luni',
-    'Marti',
+    'Marți',
     'Miercuri',
     'Joi',
     'Vineri',
-    'Sambata',
+    'Sâmbătă',
   ];
   const months = [
-    'Ian',
-    'Feb',
-    'Mar',
-    'Apr',
+    'Ianuarie',
+    'Februarie',
+    'Martie',
+    'Aprilie',
     'Mai',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
+    'Iunie',
+    'Iulie',
+    'August',
+    'Septembrie',
+    'Octombrie',
+    'Noiembrie',
+    'Decembrie',
   ];
 
   const dayOfWeek = daysOfWeek[date.getDay()];
@@ -50,6 +53,9 @@ function getDate() {
   const dateNow = `${dayOfWeek}, ${dayOfMonth} ${month}`;
   document.querySelector('.setDate').innerHTML = dateNow;
 }
+
+// initial display of date - at loading
+getDate();
 
 setInterval(function () {
   getDate();
@@ -64,7 +70,7 @@ function updateSeasonBackground() {
   let imageUrl;
   if (month >= 12 || (month >= 1 && month <= 2)) {
     //check if Dec, Jan or Feb
-    imageUrl = 'background/winter.jpg';
+    imageUrl = 'background/winterr.jpg';
   } else if (month >= 3 && month <= 5) {
     //check if March, April, or May
     imageUrl = 'background/spring.jpg';
@@ -78,6 +84,9 @@ function updateSeasonBackground() {
 
   document.body.style.backgroundImage = `url('${imageUrl}')`;
 }
+// initial check and display of updated background
+
+updateSeasonBackground();
 
 // function to get random quote from an array
 function getRandomQuote() {
@@ -98,12 +107,14 @@ function updateQuote() {
   quoteTextElement.innerHTML = getRandomQuote();
 }
 
-// initial display of a quote
+// initial display of a quote - at loading
 updateQuote();
+
+setInterval(function () {
+  getTime();
+}, 36000);
 
 // event delegation for changeQuoteButton
 const changeQuoteButton = document.querySelector('.changeQuoteButton');
 
 changeQuoteButton.addEventListener('click', updateQuote);
-
-updateSeasonBackground();
